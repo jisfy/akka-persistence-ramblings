@@ -1,7 +1,9 @@
 
-# This version of the Akka Persistence Coffee Shop relies on a Cassandra instance for its journal and snapshot storage.
-# You can run an instance of Cassandra at the expected ports and address with a simple docker instance like below. 
 
-docker run -d -p 7000:7000 -p 9042:9042 cassandra:3
+# This version of the Akka Persistence Coffee Shop relies on a postgres instance for its journal and snapshot storage.
+# You can run an instance of Postgres at the expected ports and address with a simple docker instance like below. 
+
+sudo docker build -t postgres_coffeeshop .
+sudo docker  run -p 5432:5432 -d postgres_coffeeshop
 
 # Then simply sbt "runMain com.chompchompfig.akka.Main" will run the Akka Persistence Coffee Shop
