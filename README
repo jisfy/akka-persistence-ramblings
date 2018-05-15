@@ -7,3 +7,15 @@ sudo docker build -t postgres_coffeeshop .
 sudo docker  run -p 5432:5432 -d postgres_coffeeshop
 
 # Then simply sbt "runMain com.chompchompfig.akka.Main" will run the Akka Persistence Coffee Shop
+
+# If you are using Docker Toolbox from Windows you must perform a couple of additional steps
+# Since you will be editing the code from Windows, but using the Dockerfile and some shell scripts from Linux, you must be 
+# carefull with the different new line characters used in each system. The simplest thing is to tell Git to convert the new line
+# characters to those of a Windows system, so you don't get all the source code messed up. Then you can revert this transformation for
+# a couple of files that you will typically be using from Docker/Linux. You can use dos2unix from the Windows command line to convert
+# these files back to Linux format.
+# Convert Dockefile and all files under docker-entrypoint-initdb.d
+# Finally, when you try to run the Main class from your windows host, don't forget to specify the correct container IP address. This is
+# the IP addresss of the container running the Postgres instance correctly populated with Akka Persistence tables. Copy this IP address into
+# src/main/resources/application.conf and replace the slick.db.host property with the correct value. Otherwise our running Akka program
+# will not be able to find the Journal Store.
